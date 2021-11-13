@@ -1,0 +1,57 @@
+ostream& operator<<(ostream& out, const Time& t) {
+	out << setiosflags(ios::right); out << setfill('0') << setw(2) << t.hour;
+	out << ":" << setfill('0') << setw(2) << t.min << endl;
+	return out;
+}
+
+bool Time::operator<(const Time& t2) {
+	if (hour < t2.hour) {
+		return true;
+	}
+	else if (hour == t2.hour && min < t2.min) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+Time Time::operator-(Time t2) {
+	Time duration;
+	duration.hour = hour - t2.hour;
+	duration.min = min - t2.min;
+	if (duration.min < 0) {
+		duration.min += M_MAX; //M_MAX is defined 60
+		duration.hour -= 1;
+	}
+	if (duration.hour < 0) {
+		duration.hour += H_MAX; //H_MAX is defined 24
+	}
+	return duration;
+}
+
+Time Time::operator+(Time t2) {
+	Time sum;
+	int overflow = 0;
+	sum.min = min + t2.min;
+	if (sum.min >= M_MAX) {
+		sum.min -= M_MAX;
+		overflow++;
+	}
+	sum.hour = hour + t2.hour + overflow;
+	if (sum.hour >= H_MAX) {
+		sum.hour -= H_MAX;
+	}
+	return sum;
+}
+
+Time Time::operator++() {
+	min++;
+	return *this;
+}
+
+Time Time::operator++(int) {
+	Time old = *this;
+	min++;
+	return old;
+}
