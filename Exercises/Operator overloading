@@ -1,3 +1,4 @@
+// ostream& operator<<(ostream& out, const Time& t) is a friend function
 ostream& operator<<(ostream& out, const Time& t) {
 	out << setiosflags(ios::right); out << setfill('0') << setw(2) << t.hour;
 	out << ":" << setfill('0') << setw(2) << t.min << endl;
