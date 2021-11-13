@@ -1,0 +1,27 @@
+#include <iostream>
+#include <string>
+#include <vector>
+using namespace std; 
+
+int main(void) {
+	vector<string> v;
+	string input, longest("");
+	do {
+		cout << "Enter a string(enter stop to quit):";
+		getline(cin, input);
+		if (input != "stop") {
+			v.push_back(input);
+		}
+	} while (input != "stop");
+
+	for (auto str : v) {
+		cout << str << endl;
+		if (str.length() > longest.length()) {
+			longest = str;
+		}
+	}
+	cout << "The number of strings entered is: " << v.size() << endl;
+	cout << "The longest string is " << longest << " and its length is " << longest.length() << endl;
+	cout << "Size and capacity of vector are " << v.size() << " and " << v.capacity();
+	return 0;
+}
