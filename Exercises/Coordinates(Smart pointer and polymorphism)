@@ -1,0 +1,80 @@
+#include <iostream>
+#include <vector>
+#include "Circle.h" //see Polymorphism file
+#include "Square.h" // see Polymorphism file
+#include <algorithm>
+#include "RandGen.h" // declaration and implementation at the bottom of this file 
+using namespace std;
+
+int main() {
+	std::vector<std::shared_ptr<Point>> v;
+	v.push_back(make_shared<Point>(1.0, 1.0));
+	v.push_back(make_shared<Circle>(2.0, 2.0, 2.0));
+	v.push_back(make_shared<Square>(5.0, 5.0, 2.0, 2.0));
+	auto tmp = make_shared<Point>();
+	tmp->input("Point:");
+	v.push_back(tmp);
+	tmp = make_shared<Circle>();
+	tmp->input("Circle:");
+	v.push_back(tmp);
+	tmp = make_shared<Square>();
+	tmp->input("Square:");
+	v.push_back(tmp);
+	for (const auto& i : v) {
+		i->output();
+	}
+
+	sort(v.begin(), v.end(), [](shared_ptr<Point> p1, shared_ptr<Point> p2) {
+		return p1->area() < p2->area();
+		});
+    
+	cout << "Sorted:" << endl;
+	for (const auto& i : v) {
+		i->output();
+	}
+  
+	//EXTRA
+	vector<shared_ptr<Point>> v1(5);
+	generate(v1.begin(), v1.end(), RandGen(1, 3));
+	for (const auto& i : v1) {
+		i->output();
+	}
+  
+// declaration of RandGen class
+#pragma once
+#include <vector>
+#include <time.h>
+#include <iostream>
+class RandGen {
+public:
+	RandGen(int lower0, int upper0) : upper(upper0), lower(lower0) { srand(time(NULL)); }
+	std::shared_ptr<Point> operator()();
+private:
+	const int lower;
+	const int upper;
+};
+
+//Implementation of RandGen class
+
+#include "Square.h"
+#include "Circle.h"
+#include "RandGen.h"
+#include <iostream>
+
+std::shared_ptr<Point> RandGen::operator()(){
+	std::shared_ptr<Point> p;
+	int n = upper - rand() % (upper - lower + 1);
+	if (n == 1) {
+		p = std::make_shared<Point>();
+		p->input("Point:");
+	}
+	else if (n == 2) {
+		p = std::make_shared<Circle>();
+		p->input("Circle:");
+	}
+	else {
+		p = std::make_shared<Square>();
+		p->input("Square:");
+	}
+	return p;
+}
