@@ -1,7 +1,7 @@
 #include <iostream>
 #include <vector>
-#include "Circle.h" //see Polymorphism file
-#include "Square.h" // see Polymorphism file
+#include "Circle.h" 
+#include "Square.h" 
 #include <algorithm>
 #include "RandGen.h" // declaration and implementation at the bottom of this file 
 using namespace std;
