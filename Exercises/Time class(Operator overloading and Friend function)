@@ -1,10 +1,12 @@
-// ostream& operator<<(ostream& out, const Time& t) is a friend function
+// ostream& operator<<(ostream& out, const Time& t) is a friend function to output time in format xx:yy
+// istream& operator>>(istream& in, Time& t) is a friend function to read time in format xx:yy
 #include "Time.h"
 #include <iostream>
 #include <string>
 #include <cstdio>
 #include <iomanip>
 #include <fstream>
+#include <sstream>
 #pragma warning(disable : 4996)
 
 #define H_MAX 24
@@ -37,6 +39,16 @@ ostream& operator<<(ostream& out, const Time& t) {
 	out << setiosflags(ios::right); out << setfill('0') << setw(2) << t.hour;
 	out << ":" << setfill('0') << setw(2) << t.min << endl;
 	return out;
+}
+
+istream& operator>>(istream& in, Time& t) { 
+	string buffer;
+	in >> buffer;
+	if (sscanf(buffer.c_str(), "%d:%d", &t.hour, &t.min) != 2
+		|| t.hour >= H_MAX || t.min >= M_MAX || t.hour < 0 || t.min < 0) {
+		in.setstate(ios::failbit);
+	}
+	return in;
 }
 
 Time Time::operator-(Time t2) {
