@@ -1,0 +1,33 @@
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <string>
+using namespace std;
+
+void backwards(vector<string>& v);
+int main(void) {
+	vector<string> v;
+	string input("");
+	do {
+		cout << "Enter a string(enter stop to quit):";
+		getline(cin, input);
+		if (input != "stop") {
+			v.push_back(input);
+		}
+	} while (input != "stop");
+	for (auto i : v) {
+		cout << i << endl;
+	}
+	backwards(v);
+	cout << "Backwards: \n";
+	for (auto i : v) {
+		cout << i << endl;
+	}
+}
+void backwards(vector<string> &v) {
+	for (auto &i : v) {
+		reverse(i.begin(), i.end());
+	}
+	sort(v.begin(), v.end());
+	reverse(v.begin(), v.end());
+}
