@@ -1,5 +1,5 @@
-// ostream& operator<<(ostream& out, const Time& t) is a friend function to output time in format xx:yy
-// istream& operator>>(istream& in, Time& t) is a friend function to read time in format xx:yy
+// ostream& operator<<(ostream& out, const Time& t) is a friend function to output time in format hh:mm
+// istream& operator>>(istream& in, Time& t) is a friend function to read time in format hh:mm
 #include "Time.h"
 #include <iostream>
 #include <string>
