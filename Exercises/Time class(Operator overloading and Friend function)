@@ -39,18 +39,6 @@ ostream& operator<<(ostream& out, const Time& t) {
 	return out;
 }
 
-bool Time::operator<(const Time& t2) {
-	if (hour < t2.hour) {
-		return true;
-	}
-	else if (hour == t2.hour && min < t2.min) {
-		return true;
-	}
-	else {
-		return false;
-	}
-}
-
 Time Time::operator-(Time t2) {
 	Time duration;
 	duration.hour = hour - t2.hour;
@@ -97,4 +85,37 @@ Time Time::operator++(int) {
 		hour += 1;
 	}
 	return old;
+}
+
+bool Time::operator<(const Time& t2) {
+	if (hour < t2.hour) {
+		return true;
+	}
+	else if (hour == t2.hour && min < t2.min) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+bool Time::operator>(const Time& t2) {
+	if (hour > t2.hour) {
+		return true;
+	}
+	else if (hour == t2.hour && min > t2.min) {
+		return true;
+	}
+	else {
+		return false;
+	}
+} 
+
+bool Time::operator==(const Time& t2) {
+	if (hour == t2.hour && min == t2.min) {
+		return true;
+	}
+	else {
+		return false;
+	}
 }
