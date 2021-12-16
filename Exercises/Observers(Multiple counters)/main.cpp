@@ -17,6 +17,4 @@ int main() {
 		l.inc(); 
 		o.inc(); 
 	}
-	//o.dec();
-	//l.inc();
 }
