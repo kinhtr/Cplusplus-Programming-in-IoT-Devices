@@ -54,10 +54,10 @@ public:
 private:
 	std::vector<std::weak_ptr<Car>> listing;  
 	std::string name;
-	std::mutex m;
+	static std::mutex m;
 };
 
-
+std::mutex Website::m; //static mutex definition
 
 class Dealer : public std::enable_shared_from_this<Dealer>{
 	friend std::ostream &operator<<(std::ostream &out, const Dealer &dealer);
